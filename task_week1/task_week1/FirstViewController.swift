@@ -20,12 +20,17 @@ class FirstViewController: UIViewController {
     @IBAction func secondnewbutton(_ sender: Any) {
         if self.newidtextfield.hasText && self.newpwtextfield.hasText && self.checkpwtextfield.hasText {
             
-            guard let nextVC =  storyboard?.instantiateViewController(identifier: "SecondViewController") as? SecondViewController else {return}
+//            guard let nextVC =  storyboard?.instantiateViewController(identifier: "SecondViewController") as? SecondViewController else {return}
+//
+//            nextVC.message = newidtextfield.text
+//            nextVC.modalPresentationStyle = .fullScreen
+//
+//            self.present(nextVC, animated: true, completion: {self.navigationController?.popViewController(animated: true)})
             
-            nextVC.message = newidtextfield.text
-            nextVC.modalPresentationStyle = .fullScreen
+            guard let nextVC = self.storyboard?.instantiateViewController(identifier: "TabBarController") as? UITabBarController else {return}
+
+            self.navigationController?.pushViewController(nextVC, animated: true)
             
-            self.present(nextVC, animated: true, completion: {self.navigationController?.popViewController(animated: true)})
         }
     }
     

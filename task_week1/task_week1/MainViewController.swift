@@ -20,11 +20,18 @@ class MainViewController: UIViewController {
     
     @IBAction func loginbutton(_ sender: Any) {
         if self.idtextfield.hasText && self.pwtextfield.hasText {
-            guard let nextVC = self.storyboard?.instantiateViewController(identifier: "SecondViewController") as? SecondViewController else {return}
+            guard let nextVC = self.storyboard?.instantiateViewController(identifier: "TabBarController") as? UITabBarController else {return}
+
+            self.navigationController?.pushViewController(nextVC, animated: true)
             
-            nextVC.message = idtextfield.text
-            nextVC.modalPresentationStyle = .fullScreen
-            self.present(nextVC, animated: true, completion: nil)
+//            guard let nextVC = self.storyboard?.instantiateViewController(identifier: "TabBarController") as? UITabBarController else {return}
+//
+//            nextVC.message = idtextfield.text
+//            nextVC.modalPresentationStyle = .fullScreen
+//            self.present(nextVC, animated: true, completion: nil)
+            
+            
+            
         }
     }
     
