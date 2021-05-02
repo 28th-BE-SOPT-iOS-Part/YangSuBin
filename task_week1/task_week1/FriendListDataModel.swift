@@ -14,8 +14,3 @@ struct FriendListDataModel {
     var state : String
 }
 
-struct MyDataModel {
-    var imageName : String
-    var name : String
-    var state : String
-}

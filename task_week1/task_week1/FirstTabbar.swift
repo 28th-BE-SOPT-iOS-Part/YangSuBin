@@ -7,10 +7,6 @@
 
 import UIKit
 
-//protocol SampleProtocol {
-//    func dataSend(data: String)
-//}
-
 class FirstTabbar: UIViewController {
 
     @IBOutlet weak var friendTableView: UITableView!
@@ -20,35 +16,30 @@ class FirstTabbar: UIViewController {
     @IBOutlet weak var userImage: UIImageView!
     
     var friendList : [FriendListDataModel] = []
-//    var myList : [MyDataModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         setFriendList()
         
         friendTableView.delegate = self
         friendTableView.dataSource = self
         friendTableView.separatorStyle = .none
-        // 테이블뷰에서 separator을 사용하지 않겠다
-
-        // Do any additional setup after loading the view.
     }
     
-    // 얘 잠깐만 끈다..
     @IBAction func profileButtonClicked(_ sender: Any) {
         guard let nextVC = self.storyboard?.instantiateViewController(identifier: "ProfileViewController") as? ProfileViewController else {return}
 
         nextVC.modalPresentationStyle = .fullScreen
 
-        nextVC.profileImage = UIImageView(image: userImage)
-//        nextVC.profileImage = UIImage(imageLiteralResourceName: userImage)
+        // 이미지는 대신 빈문자열을 넘겨서 프로필뷰컨에서 지정해둔 기본이미지가 뜨게
+        // 이미지 넘기려면 프로필뷰컨에 UIImage 변수 선언해서 따로 해야됨..
+        // nextVC.myimage = self.userImage.image
+        nextVC.image = ""
         nextVC.name = self.usernameLabel.text ?? ""
         nextVC.state = self.userstateLabel.text ?? ""
 
         self.present(nextVC, animated: true, completion: nil)
-//        print("프로필")
     }
     
     func setFriendList()
@@ -96,24 +87,14 @@ class FirstTabbar: UIViewController {
                 
             ])
         }
-    
-//    func setProfileList() {
-//        myList.append(contentsOf: [
-//            MyDataModel(imageName: "friendtabProfileImg",
-//                            name: "양수빈",
-//                            state: "데이터..전달....어려워..")
-//
-//        ])
-//    }
 }
 
 
-// 셀을 터치하면 무엇을 하나요? 셀의 높이, 들여쓰기
+// 셀을 터치하면 하는 동작, 셀의 높이, 들여쓰기 등
 extension FirstTabbar : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         tableView.estimatedRowHeight = 50
-        // 추청 높이를 먼저 잡는게 맞는거겠지..?
         return UITableView.automaticDimension
         //return 50
     }
@@ -123,7 +104,6 @@ extension FirstTabbar : UITableViewDelegate {
     }
     
     
-    
     // 셀 선택했을 때 넘어가는 부분
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = self.storyboard?.instantiateViewController(identifier: "ProfileViewController") as? ProfileViewController else {return}
@@ -131,21 +111,9 @@ extension FirstTabbar : UITableViewDelegate {
         cell.name = self.friendList[indexPath.row].name
         cell.image = self.friendList[indexPath.row].imageName
         cell.state = self.friendList[indexPath.row].state
-        
-        
-        // 이거로 하면 넘어는 가는데 데이터를 못받아옴....
-//        if let text = cell.nameLabel?.text {
-//            delegate?.dataSend(data: text)
-//        }
-        
-//        if let text = cell.nameLabel.text {
-//            delegate?.dataSend(data:text)
-//            delegate?.dataSend(data:text)
-//        }
  
         cell.modalPresentationStyle = .fullScreen
         self.present(cell, animated: true, completion: nil)
-        print("셀로 넘어감")
     }
     
 }
