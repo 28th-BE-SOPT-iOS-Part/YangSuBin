@@ -28,6 +28,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cyP-os-BcQ">
                                         <rect key="frame" x="380" y="17" width="19" height="20"/>
                                         <state key="normal" backgroundImage="settingIcon"/>
+                                        <connections>
+                                            <action selector="displayActionSheet:" destination="jAD-dE-ofu" eventType="touchUpInside" id="E58-AQ-mtQ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>

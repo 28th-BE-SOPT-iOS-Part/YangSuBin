@@ -27,6 +27,24 @@ class FirstTabbar: UIViewController {
         friendTableView.separatorStyle = .none
     }
     
+    // 설정버튼 누르면 아래서 올라오는 메뉴 (ActionSheet)
+    @IBAction func displayActionSheet(_ sender: Any) {
+        let optionMenu = UIAlertController(title: nil, message: "메뉴를 선택하세요", preferredStyle: .actionSheet)
+        
+        let editAction = UIAlertAction(title: "편집", style: .default)
+        let fmanageAction = UIAlertAction(title: "친구 관리", style: .default)
+        let fullsetAction = UIAlertAction(title: "전체 설정", style: .default)
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        
+        optionMenu.addAction(editAction)
+        optionMenu.addAction(fmanageAction)
+        optionMenu.addAction(fullsetAction)
+        optionMenu.addAction(cancelAction)
+        
+        self.present(optionMenu, animated: true, completion: nil)
+    }
+    
     @IBAction func profileButtonClicked(_ sender: Any) {
         guard let nextVC = self.storyboard?.instantiateViewController(identifier: "ProfileViewController") as? ProfileViewController else {return}
 
@@ -114,6 +132,24 @@ extension FirstTabbar : UITableViewDelegate {
  
         cell.modalPresentationStyle = .fullScreen
         self.present(cell, animated: true, completion: nil)
+        
+        // cell 선택해제
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+    
+    // TableView Swipe Action -> 숨김, 차단
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let hideAction = UIContextualAction(style: .destructive, title: "숨김", handler: { (ac:UIContextualAction, view:UIView, success: (Bool) -> Void) in
+            success(true)
+        })
+        
+        let blockAction = UIContextualAction(style: .destructive, title: "차단", handler: { (ac:UIContextualAction, view:UIView, success: (Bool) -> Void) in
+            success(true)
+        })
+        hideAction.backgroundColor = .systemGray
+        
+        return UISwipeActionsConfiguration(actions:[blockAction, hideAction])
     }
     
 }
@@ -130,4 +166,5 @@ extension FirstTabbar : UITableViewDataSource {
         
         return serviceCell
     }
+    
 }
