@@ -152,6 +152,21 @@ extension FirstTabbar : UITableViewDelegate {
         return UISwipeActionsConfiguration(actions:[blockAction, hideAction])
     }
     
+//    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+//
+//        let favorite = UIAction(title: "채팅하기") {_ in }
+//        let share = UIAction(title: "보이스톡") {_ in }
+//        let delete = UIAction(title: "페이스톡") {_ in }
+//        let delete2 = UIAction(title: "선물하기") {_ in }
+//
+////        self.userImage = friendList[indexPath.row].imageName
+//        self.usernameLabel = friendList[indexPath.row].name
+//
+//        return UIContextMenuConfiguration(identifier: nil, previewProvider: makeImagePreview { _ in
+//            UIMenu(title: "", children: [favorite, share, delete, delete2])
+//        })
+//    }
+    
 }
 
 extension FirstTabbar : UITableViewDataSource {
